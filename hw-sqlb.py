@@ -14,7 +14,7 @@ with sqlite3.connect("cars.db") as connection:
             ("Ford", "Fiesta", 1),
             ("Honda", "Civic", 3),
             ("Ford", "F-150", 4)
-        ]
+            ]
 
     # INSERT data into table
     c.executemany('INSERT INTO inventory VALUES(?, ?, ?)', cars)

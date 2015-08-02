@@ -1,0 +1,23 @@
+"""Finally output the car's make and model on one line, the quantity on another line, and
+   then the order_dates on subsequent lines below that."""
+
+import sqlite3
+
+with sqlite3.connect("cars.db") as connection:
+    c = connection.cursor()
+
+    c.execute("""SELECT DISTINCT inventory.Make, inventory.Model, inventory.Quantity,
+                    orders.order_date FROM inventory, orders WHERE 
+                    inventory.model = orders.model""")
+
+    rows = c.fetchall()
+
+    make = ""
+    for r in rows:
+        if r[1] != make:
+            print r[0], r[1]
+            print "Quantity: ",r[2]
+            print r[3]
+            make = r[1]
+        else:
+            print r[3]
